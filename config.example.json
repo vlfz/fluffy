@@ -2,5 +2,6 @@
     "token": "***",
     "prefix": "/",
     "vimeAuthToken": "***",
-    "ownTags": ["vlfz", "fluffyban"]
+    "ownTags": ["vlfz", "fluffyban"],
+    "owner": 1
 }

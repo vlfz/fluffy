@@ -30,7 +30,7 @@ bot.on((ctx) => {
     const args = messageContent.slice(config.prefix.length).trim().split(/ +/g);
     
     const command = bot.commands.get(args.shift().toLowerCase());
-    if(!command || (command && (command.ownerOnly == true && messageAuthorID !== 179175035))) return;
+    if(!command || (command && (command.ownerOnly == true && messageAuthorID !== config.owner))) return;
     
     return command.run(bot, ctx, args, messageContent, messageAuthorID);
 });
