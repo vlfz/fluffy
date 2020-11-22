@@ -7,3 +7,5 @@ commands/check.disabled.js
 commands/messages.disabled.js
 commands/search.disabled.js
 web.js
+web.html
+robots.txt
