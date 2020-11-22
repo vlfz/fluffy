@@ -1,5 +1,4 @@
 const wrapper = require('../wrapper');
-const ownTags = bot.config.ownTags;
 const note = {
     exists: true,
     message: "https://youtu.be/tBFyxm9sHww"
@@ -13,6 +12,8 @@ module.exports.settings = {
 };
 
 module.exports.run = (bot, ctx) => {
+    const ownTags = bot.config.ownTags;
+    
     const data = wrapper.pixelInfo();
     if(data.error) return ctx.reply(data.error.message);
     

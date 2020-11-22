@@ -1,4 +1,5 @@
 const config = require('./config');
+if(config.database) require('./web');
 // const con = require('mysql').createPool(config.database);
 const randomInteger = (min, max) => Math.floor(min + Math.random() * (max + 1 - min));
 

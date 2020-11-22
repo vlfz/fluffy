@@ -7,7 +7,7 @@ module.exports.settings = {
     ownerOnly: false
 };
 
-module.exports.run = (bot, ctx, args, messageContent, messageAuthorID) => {
+module.exports.run = (bot, ctx) => {
     const config = bot.config;
 
     fs.readdir("./commands/", (err, files) => {

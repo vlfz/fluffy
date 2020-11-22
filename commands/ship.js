@@ -5,7 +5,7 @@ module.exports.settings = {
     ownerOnly: false
 };
 
-module.exports.run = (bot, ctx, args, messageContent, messageAuthorID) => {
+module.exports.run = (bot, ctx, args) => {
     const randomInteger = bot.int;
     args = args.join(" ").split(" | ");
 
