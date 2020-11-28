@@ -8,4 +8,5 @@ commands/messages.disabled.js
 commands/search.disabled.js
 web.js
 web.html
+web.css
 robots.txt
