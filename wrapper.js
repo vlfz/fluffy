@@ -1,27 +1,31 @@
-var XML = require("xmlhttprequest").XMLHttpRequest;
-module.exports.pixelInfo = () => {
-    var xhr = new XML();
-    xhr.open('GET', 'https://vimeworld.ru/pixelbattle/meta.json', false);
-    xhr.send();
-
-    if(xhr.status !== 200) return { error: { code: "OopsItsError", message: "Какая-то дичь только что сейчас произошла. Извините, сейчас исправим. Код ошибки: " + xhr.status } };
-    else return JSON.parse(xhr.responseText);
+const fetch = require('node-fetch');
+const urls = {
+    pb: "https://vimeworld.ru/pixelbattle/meta.json",
+    userByToken: "https://api.vimeworld.ru/misc/token/^token",
+    vwevents: {
+        tournaments: "https://bwh.vimeworld.org/ajax/main/load.tournament.php",
+        tournamentMembers: "https://bwh.vimeworld.org/ajax/tournament/load.members.php"
+    }
 };
 
-module.exports.getUser = (token) => {
-    var xhr = new XML();
-    xhr.open('GET', 'https://api.vimeworld.ru/misc/token/' + token, false);
-    xhr.send();
-
-    if(xhr.status !== 200) return { error: { code: "OopsItsError", message: "Какая-то дичь только что сейчас произошла. Извините, сейчас исправим. Код ошибки: " + xhr.status } };
-    else return JSON.parse(xhr.responseText);
-};
-
-module.exports.request = (uri) => {
-    var xhr = new XML();
-    xhr.open('GET', uri, false);
-    xhr.send();
-
-    if(xhr.status !== 200) return { error: { code: "OopsItsError", message: "Какая-то дичь только что сейчас произошла. Извините, сейчас исправим. Код ошибки: " + xhr.status } };
-    else return JSON.parse(xhr.responseText);
+module.exports = {
+    pixelInfo: () => new Promise((ok, eject) =>
+        fetch(urls.pb).then(r => r.json()).then(ok).catch(eject)
+    ),
+    tournaments: () => new Promise((ok, eject) =>
+        fetch(urls.vwevents.tournaments, {
+            headers: { "x-requested-with": "XMLHttpRequest"
+        } }).then(r => r.json()).then(ok).catch(eject)
+    ),
+    tournamentMembers: (tourID) => new Promise((ok, eject) =>
+        fetch(urls.vwevents.tournamentMembers, {
+            method: "POST", body: `tournament=${tourID}&page=0`, headers: { "Content-Type": "application/x-www-form-urlencoded", "x-requested-with": "XMLHttpRequest"
+        } }).then(r => r.json()).then(ok).catch(eject)
+    ),
+    getUser: (token) => new Promise((ok, eject) =>
+        fetch(urls.userByToken.replace("^token", token)).then(r => r.json()).then(ok).catch(eject)
+    ),
+    request: (uri) => new Promise((ok, eject) =>
+        fetch(uri).then(r => r.json()).then(ok).catch(eject)
+    )
 };

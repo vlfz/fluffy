@@ -11,12 +11,10 @@ module.exports.settings = {
     ownerOnly: false
 };
 
-module.exports.run = (bot, ctx) => {
+module.exports.run = async (bot, ctx) => {
     const ownTags = bot.config.ownTags;
     
-    const data = wrapper.pixelInfo();
-    if(data.error) return ctx.reply(data.error.message);
-    
+    const data = await wrapper.pixelInfo();
     let readOnly = false;
     if(data.image.includes(`${new Date().getUTCFullYear()}.png`)) readOnly = true;
     
