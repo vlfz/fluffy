@@ -6,10 +6,10 @@ const tourID = 1;
 
 const statusProcessed = (status) => {
     switch ( Number(status) ) {
-        case 0: return "анонс";
+        case 0: return "анонс турнира";
         case 1: return "открыта регистрация";
         case 2: return "идёт игра";
-        case 3: return "завершён";
+        case 3: return "турнир завершён";
         default: return "что?";
     }
 };
@@ -50,8 +50,8 @@ module.exports.run = async (bot, ctx) => {
         `➪ Число участвующих команд: ${members.object.list.length}`,
         ``,
         `➪ Анонс турнира: ${toDate(tour.date_start)}`,
-        `➪ Открытие регистрации: ${toDate(tour.date_reg)}`,
-        `➪ Дата финальных игр: ${toDate(tour.date_game)}`,
+        // `➪ Открытие регистрации: ${toDate(tour.date_reg)}`,
+        // `➪ Дата финальных игр: ${toDate(tour.date_game)}`,
         `➪ Дата окончания: ${toDate(tour.date_end)}`,
         ``,
         `➪ Подробнее: ${tourURL.replace("^tourID", tour.id)}`
